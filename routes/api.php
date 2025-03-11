@@ -33,6 +33,8 @@ Route::get('/products', [ProductController::class, 'index']);
 
 
 
+Route::get('/products', [ProductController::class, 'index']);  // Fetch all products
+Route::post('/products', [ProductController::class, 'store']); // Add a new product
 
 
 
