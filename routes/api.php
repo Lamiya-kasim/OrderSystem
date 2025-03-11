@@ -33,11 +33,13 @@ Route::get('/products', [ProductController::class, 'index']);
 
 
 
-Route::get('/products', [ProductController::class, 'index']);  // Fetch all products
-Route::post('/products', [ProductController::class, 'store']); // Add a new product
+ // Add a new product
 
 
-
+Route::get('/products', [ProductController::class, 'index']);   // Fetch all products
+Route::post('/products', [ProductController::class, 'store']);  // Add a new product
+Route::put('/products/{id}', [ProductController::class, 'update']); // Update a product
+Route::delete('/products/{id}', [ProductController::class, 'destroy']);
 
 
 
