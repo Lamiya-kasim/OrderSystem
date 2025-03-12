@@ -49,6 +49,8 @@ Route::post('/upload', [ImageController::class, 'store'])->name('upload.store');
 use App\Http\Controllers\PostController;
 
 Route::get('/posts', [PostController::class, 'index']);
+Route::get('/gallery', [ImageController::class, 'index'])->name('gallery');
+Route::post('/upload', [ImageController::class, 'store'])->name('image.upload');
 
 
 

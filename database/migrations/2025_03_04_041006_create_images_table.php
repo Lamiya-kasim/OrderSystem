@@ -9,16 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('images', function (Blueprint $table) {
-            $table->id();
-            $table->string('title')->nullable();
-            $table->string('image_path');
-            $table->timestamps();
-        });
-    }
-    
+    public function up()
+{
+    Schema::create('images', function (Blueprint $table) {
+        $table->id();
+        $table->string('path'); // Ensure this column exists
+        $table->timestamps();
+    });
+}
+
     /**
      * Reverse the migrations.
      */
