@@ -2,10 +2,11 @@
 
 namespace App\Mail;
 
-use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Models\User;
 
 class WelcomeEmail extends Mailable
 {
@@ -30,3 +31,4 @@ class WelcomeEmail extends Mailable
                     ->view('emails.welcome');
     }
 }
+

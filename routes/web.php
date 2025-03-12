@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ImageController;
+use Illuminate\Support\Facades\Auth;
+
+
 
 
 /*
@@ -54,6 +57,22 @@ Route::post('/upload', [ImageController::class, 'store'])->name('image.upload');
 
 
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+});
 
 
+Auth::routes();
 
+
+use App\Http\Controllers\Auth\LoginController;
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/home', function () {
+    return view('home'); // Make sure `resources/views/home.blade.php` exists
+})->name('home');
+Route::get('/welcome', function () {
+    return view('welcome');
+})->name('welcome');
