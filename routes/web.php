@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\View;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
+
 
 
 
@@ -76,3 +79,19 @@ Route::get('/home', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
+
+
+//ckd
+
+
+use App\Http\Controllers\ImageUploadController;
+
+Route::get('/post-form', [PostController::class, 'create']);
+Route::post('/post', [PostController::class, 'store'])->name('post.store');
+
+// ✅ Image upload for CKEditor
+Route::post('/upload/image', [ImageUploadController::class, 'upload']);
+
+use App\Http\Controllers\UploadController;
+
+Route::post('/upload/image', [UploadController::class, 'upload'])->name('ckeditor.upload');
