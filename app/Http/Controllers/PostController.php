@@ -20,18 +20,25 @@ class PostController extends Controller
 public function store(Request $request)
 {
     $request->validate([
-        'title' => 'required',
-        'content' => 'required',
+        'title' => 'required|string|max:255',
+        'content' => 'required|string',
+        'file' => 'nullable|file|mimes:jpg,jpeg,png,pdf,docx|max:2048',
     ]);
 
-    $post = new Post();
+    $post = new Post(); // ✅ define the object early
+
     $post->title = $request->input('title');
     $post->content = $request->input('content');
+
+    // ✅ Handle file upload AFTER post is created
+    if ($request->hasFile('file')) {
+        $file = $request->file('file');
+        $path = $file->store('uploads', 'public');
+        $post->uploaded_file_url = '/storage/' . $path;
+    }
+
     $post->save();
 
     return redirect()->route('posts.index');
 }
-
-    
 }
-

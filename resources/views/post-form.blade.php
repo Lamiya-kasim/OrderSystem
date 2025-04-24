@@ -10,19 +10,25 @@
 
     <h2>Create a Post</h2>
 
-    <form method="POST" action="{{ route('posts.store') }}">
-        @csrf
+    <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
+    @csrf
 
-        <label for="title">Title:</label>
-        <input type="text" name="title" id="title" required>
-        <br><br>
+    <label for="title">Title:</label>
+    <input type="text" name="title" id="title" required>
+    <br><br>
 
-        <label for="content">Content:</label>
-        <textarea name="content" id="content"></textarea>
+    <label for="content">Content:</label>
+    <textarea name="content" id="content"></textarea>
+    <br><br>
 
-        <br>
-        <button type="submit">Submit</button>
-    </form>
+    <!-- ✅ File Upload -->
+    <label for="uploaded_file">Upload a File:</label>
+    <input type="file" name="uploaded_file" id="uploaded_file">
+    <br><br>
+
+    <button type="submit">Submit</button>
+</form>
+
 
     <script>
         ClassicEditor
