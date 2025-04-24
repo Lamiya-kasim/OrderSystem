@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Posts</title>
 </head>
 <body>
-    <h1>Blog Posts</h1>
+    <h1>Submitted Posts</h1>
 
-    @foreach ($posts as $post)
-        <x-post-card :post="$post" />
-    @endforeach
+    <h1>All Posts</h1>
+@foreach($posts as $post)
+    <h2>{{ $post->title }}</h2>
+    <div>{!! $post->content !!}</div>
+    <hr>
+@endforeach
 
+<a href="{{ route('posts.create') }}">Create another post</a>
 </body>
 </html>
-

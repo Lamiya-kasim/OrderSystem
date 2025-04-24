@@ -11,20 +11,27 @@ class PostController extends Controller
         return view('post-form'); // Make sure this Blade view exists
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-        ]);
-    
-        $post = new Post();
-        $post->title = $request->input('title');
-        $post->content = $request->input('content');
-        $post->save();
-    
-        return redirect('/post')->with('success', 'Post created successfully!');
-    }
+    public function index()
+{
+    $posts = Post::latest()->get(); // fetch all posts, latest first
+    return view('posts.index', compact('posts'));
+}
+
+public function store(Request $request)
+{
+    $request->validate([
+        'title' => 'required',
+        'content' => 'required',
+    ]);
+
+    $post = new Post();
+    $post->title = $request->input('title');
+    $post->content = $request->input('content');
+    $post->save();
+
+    return redirect()->route('posts.index');
+}
+
     
 }
 
