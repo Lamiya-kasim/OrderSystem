@@ -22,18 +22,16 @@ public function store(Request $request)
     $request->validate([
         'title' => 'required|string|max:255',
         'content' => 'required|string',
-        'file' => 'nullable|file|mimes:jpg,jpeg,png,pdf,docx|max:2048',
+        'uploaded_file' => 'nullable|file|mimes:jpg,jpeg,png,pdf,docx|max:2048',
     ]);
 
-    $post = new Post(); // ✅ define the object early
-
+    $post = new Post();
     $post->title = $request->input('title');
     $post->content = $request->input('content');
 
-    // ✅ Handle file upload AFTER post is created
-    if ($request->hasFile('file')) {
-        $file = $request->file('file');
-        $path = $file->store('uploads', 'public');
+    if ($request->hasFile('uploaded_file')) {
+        $file = $request->file('uploaded_file');
+        $path = $file->store('uploads', 'public'); // storage/app/public/uploads
         $post->uploaded_file_url = '/storage/' . $path;
     }
 
@@ -41,4 +39,5 @@ public function store(Request $request)
 
     return redirect()->route('posts.index');
 }
+
 }
