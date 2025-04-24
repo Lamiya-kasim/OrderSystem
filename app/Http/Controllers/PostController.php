@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -12,7 +13,18 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        // For now, just dump the content to check
-        dd($request->input('content'));
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+    
+        $post = new Post();
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
+        $post->save();
+    
+        return redirect('/post')->with('success', 'Post created successfully!');
     }
+    
 }
+

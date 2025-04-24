@@ -94,4 +94,9 @@ Route::post('/upload/image', [ImageUploadController::class, 'upload']);
 
 use App\Http\Controllers\UploadController;
 
+
 Route::post('/upload/image', [UploadController::class, 'upload'])->name('ckeditor.upload');
+
+Route::get('/post-form', [PostController::class, 'create']);
+Route::post('/post-form', [PostController::class, 'store'])->name('posts.store');
+
